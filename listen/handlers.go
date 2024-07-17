@@ -35,7 +35,11 @@ func (l ActivityListener) handleActivity(activity *prime.Activity) {
 
 	hash, err := util.Fingerprint(activity)
 	if err != nil {
-		zap.L().Error("cannot fingerprint Activity", zap.Error(err), zap.Any("doc", activity))
+		zap.L().Error(
+			"cannot fingerprint Activity", zap.Error(err),
+			zap.String("activityId", activity.Id),
+			zap.String("referenceId", activity.ReferenceId),
+		)
 		return
 	}
 

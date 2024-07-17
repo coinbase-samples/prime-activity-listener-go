@@ -30,7 +30,7 @@ func (l ActivityListener) publishActivity(activity *prime.Activity) bool {
 	defer cancel()
 
 	if err := broadcast.SnsPublishActivityMessage(ctx, l.config, activity); err != nil {
-		zap.L().Error("cannot publish Activity", zap.Error(err), zap.Any("doc", activity))
+		zap.L().Error("cannot publish Activity", zap.Error(err))
 		return false
 	}
 

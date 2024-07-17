@@ -61,14 +61,3 @@ build-image:
 	@docker tag $(STACK_NAME):$(BUILD_ID) $(ACCOUNT_ID).dkr.ecr.$(REGION).amazonaws.com/$(STACK_NAME):$(BUILD_ID)
 	@docker push $(ACCOUNT_ID).dkr.ecr.$(REGION).amazonaws.com/$(STACK_NAME):$(BUILD_ID)
 
-.PHONY: update-service
-update-service:
-	@aws ecr-public get-login-password --region $(REGION) --profile $(PROFILE) | docker login --username AWS --password-stdin public.ecr.aws
-	@aws ecr get-login-password --region $(REGION) --profile $(PROFILE) | docker login --username AWS --password-stdin $(ACCOUNT_ID).dkr.ecr.$(REGION).amazonaws.com
-	@aws ecs update-service \
-  --profile $(PROFILE) \
-  --region $(REGION) \
-  --cluster $(STACK_NAME) \
-  --service $(STACK_NAME) \
-  --force-new-deployment
-

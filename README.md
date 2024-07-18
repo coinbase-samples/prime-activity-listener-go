@@ -8,6 +8,8 @@
 
 The *Coinbase Prime Activity Listener* is a sample application that demonstrates how to poll for new portfolio [activities](https://docs.cdp.coinbase.com/prime/reference/primerestapi_getportfolioactivities) and broadcast them to external services for consumption. This sample application writes the activity data to the [Amazon Simple Notification Service](https://docs.aws.amazon.com/sns/latest/dg/welcome.html) (SNS) and there are two subscriptions to the topic. The first subscription is an [Amazon Simple Queue Service](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html) (SQS) queue and the second is an [Amazon Data Firehose](https://docs.aws.amazon.com/firehose/latest/dev/what-is-this-service.html) (Firehose) stream. The Firehose stream persists the activities to an [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html) (S3) bucket, but the service also supports persisting data to Amazon OpenSearch, Amazon Kinesis Data Streams, Amazon Managed Streaming for Apache Kafka, Snowflake, Splunk, Redshift, and custom HTTP endpoints.
 
+![Overview](overview.png)
+
 ## License
 
 The *Coinbase Prime Activity Listener* sample application is free and open source and released under the [Apache License, Version 2.0](LICENSE).

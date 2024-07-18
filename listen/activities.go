@@ -51,7 +51,7 @@ func (l ActivityListener) run() {
 
 }
 
-func (l ActivityListener) poll() {
+func (l ActivityListener) poll() bool {
 
 	var nextCursor string
 
@@ -60,7 +60,7 @@ func (l ActivityListener) poll() {
 		response, err := l.listActivities(nextCursor)
 		if err != nil {
 			zap.L().Error("unable to call ListActivities", zap.Error(err))
-			break
+			return false
 		}
 
 		l.handleActivities(response.Activities)
@@ -73,6 +73,8 @@ func (l ActivityListener) poll() {
 			nextCursor = response.Pagination.NextCursor
 		}
 	}
+
+	return true
 }
 
 func (l ActivityListener) listActivities(nextCursor string) (*prime.ListActivitiesResponse, error) {

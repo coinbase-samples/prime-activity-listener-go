@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/golang:1.20.11-alpine3.17 as builder
+FROM public.ecr.aws/docker/library/golang:1.21.4-alpine3.17 as builder
 
 WORKDIR /
 COPY . .
